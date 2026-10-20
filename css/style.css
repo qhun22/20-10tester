@@ -156,26 +156,48 @@ body {
     }
 }
 
-.message-card {
+.message-overlay {
     position: fixed;
-    z-index: 20;
-    top: max(20px, env(safe-area-inset-top));
-    left: 50%;
-    transform: translateX(-50%);
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(40, 55, 60, .32);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+}
+
+.message-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.message-card {
     width: min(92%, 420px);
-    padding: 20px 22px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 28px 24px;
     border: 1px solid rgba(255, 255, 255, .6);
     border-radius: 24px;
-    background: rgba(255, 255, 255, .55);
-    box-shadow: 0 14px 40px rgba(60, 90, 100, .12);
-    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, .92);
+    box-shadow: 0 18px 50px rgba(60, 90, 100, .22);
     text-align: center;
+    transform: scale(.94);
+    transition: transform .25s ease;
+}
+
+.message-overlay.is-visible .message-card {
+    transform: scale(1);
 }
 
 .message-text {
     margin: 0;
     color: #2e3a3f;
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 1.6;
     white-space: pre-wrap;
     min-height: 1.6em;
@@ -192,13 +214,38 @@ body {
     50% { opacity: 0; }
 }
 
+.flower-hint {
+    position: fixed;
+    left: 50%;
+    bottom: max(28px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 15;
+    color: #6b4a5a;
+    font-size: .85rem;
+    background: rgba(255, 255, 255, .55);
+    padding: 8px 16px;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(60, 90, 100, .12);
+    animation: hint-bounce 1.6s ease-in-out infinite;
+    white-space: nowrap;
+}
+
+@keyframes hint-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-6px); }
+}
+
 @media (max-width: 380px) {
     .message-card {
-        top: max(12px, env(safe-area-inset-top));
-        padding: 16px 18px;
+        padding: 20px 18px;
     }
 
     .message-text {
-        font-size: .92rem;
+        font-size: .95rem;
+    }
+
+    .flower-hint {
+        font-size: .78rem;
+        padding: 7px 14px;
     }
 }

@@ -27,10 +27,13 @@ export function renderGiftPage({ title, message, notFound = false }) {
       </main>
       <div class="gift-stage container" id="giftStage" hidden>
           <div class="night"></div>
-          <div class="message-card" id="messageCard">
-            <p class="message-text" id="messageText"></p>
-          </div>
           ${FLOWERS_MARKUP}
+      </div>
+      <p class="flower-hint" id="flowerHint" hidden>Chạm vào hoa nhé 🌷</p>
+      <div class="message-overlay" id="messageOverlay">
+        <div class="message-card" id="messageCard">
+          <p class="message-text" id="messageText"></p>
+        </div>
       </div>`;
 
   const script = notFound
@@ -44,8 +47,11 @@ export function renderGiftPage({ title, message, notFound = false }) {
         var passcodeScreen = document.getElementById("passcodeScreen");
         var giftStage = document.getElementById("giftStage");
         var messageText = document.getElementById("messageText");
+        var messageOverlay = document.getElementById("messageOverlay");
+        var flowerHint = document.getElementById("flowerHint");
         var enteredPin = "";
         var pinLength = 4;
+        var messageTyped = false;
 
         for (var i = 0; i < pinLength; i++) {
           var dot = document.createElement("span");
@@ -108,14 +114,39 @@ export function renderGiftPage({ title, message, notFound = false }) {
           step();
         }
 
+        function showMessage() {
+          messageOverlay.classList.add("is-visible");
+          if (!messageTyped) {
+            messageTyped = true;
+            typeMessage(MESSAGE);
+          }
+        }
+
+        function hideMessage() {
+          messageOverlay.classList.remove("is-visible");
+        }
+
         function unlock() {
           passcodeScreen.remove();
           giftStage.hidden = false;
+          flowerHint.hidden = false;
           window.setTimeout(function () {
             giftStage.classList.remove("container");
           }, 50);
-          typeMessage(MESSAGE);
         }
+
+        giftStage.addEventListener("click", function (event) {
+          if (event.target.closest(".flowers")) {
+            flowerHint.hidden = true;
+            showMessage();
+          }
+        });
+
+        messageOverlay.addEventListener("click", function (event) {
+          if (event.target === messageOverlay) {
+            hideMessage();
+          }
+        });
 
         function submitPin() {
           fetch(window.location.pathname + "/verify", {

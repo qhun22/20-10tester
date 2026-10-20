@@ -185,6 +185,7 @@ export function renderAdminDashboard({ gifts, origin }) {
       form.parentElement.querySelector(".qr-btn").addEventListener("click", function () {
         var box = form.parentElement.querySelector(".qr-box");
         var url = ORIGIN + "/g/" + id;
+        var svgUrl = "/admin/api/gifts/" + id + "/qr.svg?t=" + Date.now();
         if (box.hidden) {
           box.hidden = false;
           box.innerHTML = "";
@@ -192,11 +193,55 @@ export function renderAdminDashboard({ gifts, origin }) {
           img.width = 180;
           img.height = 180;
           img.alt = "QR code";
-          img.src = "/admin/api/gifts/" + id + "/qr.svg?t=" + Date.now();
+          img.src = svgUrl;
           box.appendChild(img);
-          var info = document.createElement("div");
-          info.innerHTML = "<div><a class=\\"link-url\\" href=\\"" + url + "\\" target=\\"_blank\\">" + url + "</a></div>";
-          box.appendChild(info);
+
+          var actions = document.createElement("div");
+          actions.innerHTML = "<div><a class=\\"link-url\\" href=\\"" + url + "\\" target=\\"_blank\\">" + url + "</a></div>" +
+            "<div class=\\"row\\" style=\\"margin-top:8px;\\">" +
+            "<button type=\\"button\\" class=\\"secondary download-svg\\">Tải SVG</button>" +
+            "<button type=\\"button\\" class=\\"secondary download-png\\">Tải PNG</button>" +
+            "</div>";
+          box.appendChild(actions);
+
+          actions.querySelector(".download-svg").addEventListener("click", function () {
+            var a = document.createElement("a");
+            a.href = svgUrl;
+            a.download = "qr-" + id + ".svg";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          });
+
+          actions.querySelector(".download-png").addEventListener("click", function () {
+            fetch(svgUrl)
+              .then(function (r) { return r.text(); })
+              .then(function (svgText) {
+                var svgBlob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+                var blobUrl = URL.createObjectURL(svgBlob);
+                var tmpImg = new Image();
+                tmpImg.onload = function () {
+                  var scale = 4;
+                  var canvas = document.createElement("canvas");
+                  canvas.width = tmpImg.width * scale;
+                  canvas.height = tmpImg.height * scale;
+                  var ctx = canvas.getContext("2d");
+                  ctx.drawImage(tmpImg, 0, 0, canvas.width, canvas.height);
+                  URL.revokeObjectURL(blobUrl);
+                  canvas.toBlob(function (pngBlob) {
+                    var pngUrl = URL.createObjectURL(pngBlob);
+                    var a = document.createElement("a");
+                    a.href = pngUrl;
+                    a.download = "qr-" + id + ".png";
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(pngUrl);
+                  }, "image/png");
+                };
+                tmpImg.src = blobUrl;
+              });
+          });
         } else {
           box.hidden = true;
         }
