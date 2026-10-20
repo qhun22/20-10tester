@@ -17,7 +17,7 @@ body {
   align-items: flex-end;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f7fbff;
+  background-color: #eef1f3;
   overflow: hidden;
   perspective: 1000px;
   font-family: Saira, Arial, sans-serif;
@@ -33,10 +33,10 @@ body {
   filter: blur(0.1vmin);
   background-image: radial-gradient(
       ellipse at top,
-      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.55),
       transparent 70%
     ),
-    linear-gradient(180deg, #e9f8ff 0%, #f7fbff 65%, #dff3f5 100%);
+    linear-gradient(180deg, #dde6ea 0%, #eef1f3 65%, #cfdbdd 100%);
 }
 
 .flowers {
