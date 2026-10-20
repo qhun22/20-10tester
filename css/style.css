@@ -22,8 +22,8 @@ body {
     padding: 24px 16px;
     overflow: hidden;
     background:
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, .9), transparent 42%),
-        linear-gradient(160deg, #fff8fb 0%, #ffeaf2 100%);
+        radial-gradient(ellipse at top, rgba(255, 255, 255, .55), transparent 70%),
+        linear-gradient(180deg, #dde6ea 0%, #eef1f3 65%, #cfdbdd 100%);
 }
 
 .passcode-card {
@@ -153,5 +153,52 @@ body {
 
     .key {
         min-height: 54px;
+    }
+}
+
+.message-card {
+    position: fixed;
+    z-index: 20;
+    top: max(20px, env(safe-area-inset-top));
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92%, 420px);
+    padding: 20px 22px;
+    border: 1px solid rgba(255, 255, 255, .6);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, .55);
+    box-shadow: 0 14px 40px rgba(60, 90, 100, .12);
+    backdrop-filter: blur(6px);
+    text-align: center;
+}
+
+.message-text {
+    margin: 0;
+    color: #2e3a3f;
+    font-size: 1rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    min-height: 1.6em;
+}
+
+.message-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    animation: message-blink 1s step-end infinite;
+}
+
+@keyframes message-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@media (max-width: 380px) {
+    .message-card {
+        top: max(12px, env(safe-area-inset-top));
+        padding: 16px 18px;
+    }
+
+    .message-text {
+        font-size: .92rem;
     }
 }

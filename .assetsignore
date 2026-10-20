@@ -1,8 +1,0 @@
-node_modules
-scss
-package.json
-package-lock.json
-wrangler.toml
-.gitignore
-.assetsignore
-README.md

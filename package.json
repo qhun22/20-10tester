@@ -4,10 +4,17 @@
   "description": "Happy Vietnamese Women's Day flower site",
   "private": true,
   "scripts": {
-    "build": "sass scss/main.scss css/main.css --no-source-map",
-    "watch": "sass --watch scss/main.scss:css/main.css"
+    "build:css": "sass scss/main.scss css/main.css --no-source-map",
+    "sync:public": "node scripts/sync-public.js",
+    "build": "npm run build:css && npm run sync:public",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "devDependencies": {
-    "sass": "^1.77.8"
+    "sass": "^1.77.8",
+    "wrangler": "^4.0.0"
+  },
+  "dependencies": {
+    "qrcode-generator": "^2.0.4"
   }
 }

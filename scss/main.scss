@@ -13,14 +13,18 @@
 }
 
 body {
+  min-height: 100vh;
+  background-color: #eef1f3;
+  font-family: Saira, Arial, sans-serif;
+}
+
+.gift-stage {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   min-height: 100vh;
-  background-color: #eef1f3;
   overflow: hidden;
   perspective: 1000px;
-  font-family: Saira, Arial, sans-serif;
 }
 
 .night {

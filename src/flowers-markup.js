@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" href="img/flowers.png" type="image/x-icon">
-    <title>flowers</title>
-</head>
-<body class="container">
-    <div class="night"></div>
-    <div class="flowers">
+export const FLOWERS_MARKUP = `<div class="flowers">
       <div class="flower flower--1">
         <div class="flower__leafs flower__leafs--1">
           <div class="flower__leaf flower__leaf--1"></div>
@@ -305,7 +293,4 @@
           <div class="leaf leaf--3"></div>
         </div>
       </div>
-    </div>
-    <script src="main.js"></script>
-  </body>
-</html>
+    </div>`;
