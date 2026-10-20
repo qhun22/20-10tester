@@ -31,10 +31,10 @@ body {
     max-width: 360px;
     margin: 0 auto;
     padding: 30px 22px 28px;
-    border: 1px solid rgba(226, 108, 139, .14);
+    border: 1px solid rgba(60, 90, 100, .12);
     border-radius: 30px;
     background: rgba(255, 255, 255, .76);
-    box-shadow: 0 18px 50px rgba(194, 87, 119, .16);
+    box-shadow: 0 18px 50px rgba(60, 90, 100, .16);
     text-align: center;
 }
 
@@ -45,22 +45,22 @@ body {
     height: 54px;
     margin: 0 auto 12px;
     border-radius: 50%;
-    color: #d74770;
-    background: #ffe0ea;
+    color: #1f7a8c;
+    background: #dceef1;
     font-size: 34px;
     line-height: 1;
 }
 
 .passcode-card h1 {
     margin: 0;
-    color: #c83d67;
+    color: #176b78;
     font-size: clamp(1.7rem, 8vw, 2.1rem);
     font-weight: 700;
 }
 
 .passcode-subtitle {
     margin: 8px 0 20px;
-    color: #a56a7d;
+    color: #5c7b82;
     font-size: .86rem;
 }
 
@@ -75,7 +75,7 @@ body {
 .passcode-dot {
     width: 14px;
     height: 14px;
-    border: 2px solid #e17492;
+    border: 2px solid #5fa8b5;
     border-radius: 50%;
     background: transparent;
     transition: background-color .15s, transform .15s;
@@ -83,19 +83,19 @@ body {
 
 .passcode-dot.is-filled {
     transform: scale(1.08);
-    background: #df5278;
+    background: #1f7a8c;
 }
 
 .passcode-message {
     min-height: 21px;
     margin: 0 0 12px;
-    color: #ba5573;
+    color: #4f7079;
     font-size: .78rem;
 }
 
 .passcode-message.is-error {
     animation: shake .25s ease-in-out;
-    color: #d13b54;
+    color: #c0392b;
 }
 
 .keypad {
@@ -108,11 +108,11 @@ body {
 
 .key {
     min-height: 58px;
-    border: 1px solid #f2c8d5;
+    border: 1px solid #cfe0e3;
     border-radius: 17px;
-    color: #713d4d;
+    color: #2e3a3f;
     background: rgba(255, 255, 255, .88);
-    box-shadow: 0 4px 0 #f5dce4;
+    box-shadow: 0 4px 0 #dce9eb;
     font: inherit;
     font-size: 1.3rem;
     cursor: pointer;
@@ -122,12 +122,12 @@ body {
 
 .key:active {
     transform: translateY(3px);
-    background: #fff0f5;
-    box-shadow: 0 1px 0 #f5dce4;
+    background: #eef6f7;
+    box-shadow: 0 1px 0 #dce9eb;
 }
 
 .key-delete {
-    color: #c43f5f;
+    color: #c0392b;
     font-size: 2rem;
     line-height: 1;
 }
